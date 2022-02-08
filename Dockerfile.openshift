@@ -5,8 +5,8 @@ FROM registry.ci.openshift.org/ocp/builder:rhel-8-golang-1.16-openshift-4.10 AS 
 ADD . /usr/src/multus-service
 
 RUN cd /usr/src/multus-service && \
-    go build ./cmd/multus-proxy/ && \
-    go build ./cmd/multus-service-controller/
+    go build -mod=vendor ./cmd/multus-proxy/ && \
+    go build -mod=vendor ./cmd/multus-service-controller/
 
 FROM registry.ci.openshift.org/ocp/4.10:base
 RUN dnf install -y iptables
